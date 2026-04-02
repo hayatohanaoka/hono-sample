@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: hono-api
+build:
+  artifacts:
+    - image: hono-api
+      docker:
+        dockerfile: ./app/Dockerfile
+      context: ../app
+  local:
+    push: false
+    useBuildkit: true
+  tagPolicy:
+    gitCommit:
+      variant: AbbrevCommitSha
+deploy:
+  helm:
+    releases:
+      - name: hono-api
+        chartPath: ./app/helm
+        setValues:
+          name: hono-api
+          replicas: 1
+          image: hono-api
+profiles:
+  - name: prd
+    patches:
+      - op: replace
+        path: /deploy/helm/releases/0/setValues/replicas
+        value: 2
