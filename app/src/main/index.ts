@@ -1,11 +1,10 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import v1Resources from './resources/v1Resources.js'
 
 const app = new Hono()
 
-app.get('/v1/systems/ping', (c) => {
-  return c.text('pong')
-})
+app.route('/api/v1', v1Resources)
 
 serve({
   fetch: app.fetch,
