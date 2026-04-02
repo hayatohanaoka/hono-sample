@@ -62,7 +62,7 @@ jobs:
         run: pnpm vitest run
         working-directory: e2e
       - name: Down api
-        run: fuser -k -9 3100/tcp
+        run: fuser -k -9 13000/tcp
   build-image:
     needs: [run-e2e-tests]
     timeout-minutes: 60
