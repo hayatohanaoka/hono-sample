@@ -53,12 +53,12 @@ jobs:
         run: pnpm install --frozen-lockfile
         working-directory: app
       - name: Run api
-        run: pnpm tsx src/index.ts &
+        run: pnpm tsx src/main/index.ts &
         working-directory: app
       - name: Install E2E dependencies
         run: pnpm install --frozen-lockfile
         working-directory: e2e
-      - name: Run jest tests
+      - name: Run e2e tests
         run: pnpm vitest run
         working-directory: e2e
       - name: Down api
