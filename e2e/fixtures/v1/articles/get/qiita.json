@@ -1,0 +1,114 @@
+[
+  {
+    "rendered_body": "dummy",
+    "body": "dummy",
+    "coediting": false,
+    "comments_count": 0,
+    "created_at": "2026-04-02T23:18:39+09:00",
+    "group": null,
+    "id": "dummy",
+    "likes_count": 0,
+    "private": false,
+    "reactions_count": 0,
+    "stocks_count": 0,
+    "tags": [
+      {
+        "name": "Android",
+        "versions": []
+      },
+      {
+        "name": "Kotlin",
+        "versions": []
+      },
+      {
+        "name": "YouTube",
+        "versions": []
+      },
+      {
+        "name": "Twitch",
+        "versions": []
+      }
+    ],
+    "title": "AI Agentについて、全てをお話します",
+    "updated_at": "2026-04-02T23:18:39+09:00",
+    "url": "https://qiita.com/dummy/items/1",
+    "user": {
+      "description": "dummy",
+      "facebook_id": "dummy",
+      "followees_count": 2,
+      "followers_count": 1,
+      "github_login_name": "dummy",
+      "id": "dummy",
+      "items_count": 17,
+      "linkedin_id": "",
+      "location": "日本",
+      "name": "",
+      "organization": "会社",
+      "permanent_id": 29222,
+      "profile_image_url": "dummy",
+      "team_only": false,
+      "twitter_screen_name": "dummy",
+      "website_url": "dummy"
+    },
+    "page_views_count": null,
+    "team_membership": null,
+    "organization_url_name": null,
+    "slide": false
+  },
+  {
+    "rendered_body": "dummy",
+    "body": "dummy",
+    "coediting": false,
+    "comments_count": 0,
+    "created_at": "2026-04-02T23:18:39+09:00",
+    "group": null,
+    "id": "dummy",
+    "likes_count": 0,
+    "private": false,
+    "reactions_count": 0,
+    "stocks_count": 0,
+    "tags": [
+      {
+        "name": "Android",
+        "versions": []
+      },
+      {
+        "name": "Kotlin",
+        "versions": []
+      },
+      {
+        "name": "YouTube",
+        "versions": []
+      },
+      {
+        "name": "Twitch",
+        "versions": []
+      }
+    ],
+    "title": "MCPサーバーの作り方について、全てをお話します",
+    "updated_at": "2026-04-02T23:18:39+09:00",
+    "url": "https://qiita.com/dummy/items/2",
+    "user": {
+      "description": "dummy",
+      "facebook_id": "dummy",
+      "followees_count": 2,
+      "followers_count": 1,
+      "github_login_name": "dummy",
+      "id": "dummy",
+      "items_count": 17,
+      "linkedin_id": "",
+      "location": "日本",
+      "name": "",
+      "organization": "会社",
+      "permanent_id": 29222,
+      "profile_image_url": "dummy",
+      "team_only": false,
+      "twitter_screen_name": "dummy",
+      "website_url": "dummy"
+    },
+    "page_views_count": null,
+    "team_membership": null,
+    "organization_url_name": null,
+    "slide": false
+  }
+]
