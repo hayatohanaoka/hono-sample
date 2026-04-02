@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: environments
+        working-directory: environment
     steps:
       - uses: actions/checkout@v4
       - name: Install Skaffold
