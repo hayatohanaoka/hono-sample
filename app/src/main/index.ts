@@ -1,6 +1,6 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import v1Resources from './resources/v1Resources.js'
+import v1Resources from './rest/v1/handler.js'
 
 const app = new Hono()
 

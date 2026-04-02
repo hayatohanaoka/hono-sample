@@ -1,6 +1,6 @@
 import { Hono } from "hono"
-import { getArticlesUseCase } from "../dependencies.js"
-import type { Articles } from "../domain/articles.js"
+import { getArticlesUseCase } from "../../dependencies.js"
+import type { Articles } from "../../domain/articles.js"
 
 type ArticlesResponse = {
     "articles": ArticleResponse[]
