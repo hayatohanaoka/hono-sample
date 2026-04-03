@@ -4,6 +4,6 @@ export class GetArticlesUseCase {
         this.port = port;
     }
     async execute() {
-        return await this.port.getArticles();
+        return await this.port.get();
     }
 }

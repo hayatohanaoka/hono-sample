@@ -1,8 +1,7 @@
 import { describe, test, expect } from "vitest";
 
 describe('GET /v1/articles', () => {
-    // TODO: unimplemented
-    test.skip('qiitaとZennから、最新の記事を取得して返す', async () => {
+    test('qiitaとZennから、最新の記事を取得して返す', async () => {
         const expected = JSON.stringify({
             "articles": [
                 {
@@ -24,7 +23,7 @@ describe('GET /v1/articles', () => {
             ]
         })
 
-        const response = await fetch('http://localhost:13000/v1/articles')
+        const response = await fetch('http://localhost:13000/api/v1/articles')
 
         const actual = await response.json();
         

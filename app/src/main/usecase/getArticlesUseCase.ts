@@ -1,5 +1,5 @@
-import type { Articles } from "../domain/articles.js"
-import type { ArticlesPort } from "../port/articlesPort.js"
+import type { Articles } from "../domain/articles.js";
+import type { ArticlesPort } from "../port/articlesPort.js";
 
 export class GetArticlesUseCase {
     private readonly port: ArticlesPort;
@@ -9,6 +9,6 @@ export class GetArticlesUseCase {
     }
 
     async execute(): Promise<Articles> {
-        return await this.port.getArticles()
+        return await this.port.get()
     }
 }
