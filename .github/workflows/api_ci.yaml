@@ -28,8 +28,8 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      QIITA_URL: 'http://localhost:3000'
-      ZENN_URL: 'http://localhost:3001'
+      QIITA_URL: 'https://qiita.com'
+      ZENN_URL: 'https://zenn.dev'
     defaults:
       run:
         working-directory: app
