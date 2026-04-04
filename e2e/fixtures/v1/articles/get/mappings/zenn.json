@@ -1,76 +1,88 @@
 {
-  "articles": [
-    {
-      "id": 1,
-      "post_type": "Article",
-      "slug": "dummy-article-slug",
-      "comments_count": 0,
-      "liked_count": 0,
-      "bookmarked_count": 0,
-      "body_letters_count": 100,
-      "article_type": "tech",
-      "emoji": "📝",
-      "is_suspending_private": false,
-      "published_at": "2026-01-01T00:00:00.000+09:00",
-      "body_updated_at": "2026-01-02T00:00:00.000+09:00",
-      "source_repo_updated_at": "2026-01-02T00:00:00.000+09:00",
-      "pinned": false,
-      "path": "/dummy_pub/articles/dummy-article-slug",
-      "principal_type": "Publication",
-      "title": "E2E フィクスチャのセットアップ方法",
-      "user": {
-        "id": 1,
-        "username": "dummy_user",
-        "name": "ダミーユーザー",
-        "avatar_small_url": "https://example.com/avatars/dummy-small.png"
-      },
-      "publication": {
-        "id": 1,
-        "name": "dummy_pub",
-        "display_name": "ダミー公開ブログ",
-        "avatar_small_url": "https://example.com/avatars/pub-small.png",
-        "avatar_url": "https://example.com/avatars/pub.png",
-        "pro": false,
-        "avatar_registered": true
-      },
-      "publication_article_override": null
+  "request": {
+    "method": "GET",
+    "url": "/api/articles?article_type=tech"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
     },
-    {
-      "id": 1,
-      "post_type": "Article",
-      "slug": "dummy-article-slug",
-      "comments_count": 0,
-      "liked_count": 0,
-      "bookmarked_count": 0,
-      "body_letters_count": 100,
-      "article_type": "tech",
-      "emoji": "📝",
-      "is_suspending_private": false,
-      "published_at": "2026-01-01T00:00:00.000+09:00",
-      "body_updated_at": "2026-01-02T00:00:00.000+09:00",
-      "source_repo_updated_at": "2026-01-02T00:00:00.000+09:00",
-      "pinned": false,
-      "path": "/dummy_pub/articles/dummy-article-slug2",
-      "principal_type": "Publication",
-      "title": "クリーンアーキテクチャについて",
-      "user": {
-        "id": 1,
-        "username": "dummy_user",
-        "name": "ダミーユーザー",
-        "avatar_small_url": "https://example.com/avatars/dummy-small.png"
-      },
-      "publication": {
-        "id": 1,
-        "name": "dummy_pub",
-        "display_name": "ダミー公開ブログ",
-        "avatar_small_url": "https://example.com/avatars/pub-small.png",
-        "avatar_url": "https://example.com/avatars/pub.png",
-        "pro": false,
-        "avatar_registered": true
-      },
-      "publication_article_override": null
-    }
-  ],
-  "next_page": 2,
-  "total_count": null
+    "jsonBody": {
+      "articles": [
+        {
+          "id": 1,
+          "post_type": "Article",
+          "slug": "dummy-article-slug",
+          "comments_count": 0,
+          "liked_count": 0,
+          "bookmarked_count": 0,
+          "body_letters_count": 100,
+          "article_type": "tech",
+          "emoji": "📝",
+          "is_suspending_private": false,
+          "published_at": "2026-01-01T00:00:00.000+09:00",
+          "body_updated_at": "2026-01-02T00:00:00.000+09:00",
+          "source_repo_updated_at": "2026-01-02T00:00:00.000+09:00",
+          "pinned": false,
+          "path": "/dummy_pub/articles/dummy-article-slug",
+          "principal_type": "Publication",
+          "title": "E2E フィクスチャのセットアップ方法",
+          "user": {
+            "id": 1,
+            "username": "dummy_user",
+            "name": "ダミーユーザー",
+            "avatar_small_url": "https://example.com/avatars/dummy-small.png"
+          },
+          "publication": {
+            "id": 1,
+            "name": "dummy_pub",
+            "display_name": "ダミー公開ブログ",
+            "avatar_small_url": "https://example.com/avatars/pub-small.png",
+            "avatar_url": "https://example.com/avatars/pub.png",
+            "pro": false,
+            "avatar_registered": true
+          },
+          "publication_article_override": null
+        },
+        {
+          "id": 1,
+          "post_type": "Article",
+          "slug": "dummy-article-slug",
+          "comments_count": 0,
+          "liked_count": 0,
+          "bookmarked_count": 0,
+          "body_letters_count": 100,
+          "article_type": "tech",
+          "emoji": "📝",
+          "is_suspending_private": false,
+          "published_at": "2026-01-01T00:00:00.000+09:00",
+          "body_updated_at": "2026-01-02T00:00:00.000+09:00",
+          "source_repo_updated_at": "2026-01-02T00:00:00.000+09:00",
+          "pinned": false,
+          "path": "/dummy_pub/articles/dummy-article-slug2",
+          "principal_type": "Publication",
+          "title": "クリーンアーキテクチャについて",
+          "user": {
+            "id": 1,
+            "username": "dummy_user",
+            "name": "ダミーユーザー",
+            "avatar_small_url": "https://example.com/avatars/dummy-small.png"
+          },
+          "publication": {
+            "id": 1,
+            "name": "dummy_pub",
+            "display_name": "ダミー公開ブログ",
+            "avatar_small_url": "https://example.com/avatars/pub-small.png",
+            "avatar_url": "https://example.com/avatars/pub.png",
+            "pro": false,
+            "avatar_registered": true
+          },
+          "publication_article_override": null
+        }
+      ],
+      "next_page": 2,
+      "total_count": null
+    }    
+  }
 }

@@ -66,23 +66,31 @@ jobs:
       - name: Install api app dependencies
         run: pnpm install --frozen-lockfile
         working-directory: app
+      - name: Install E2E dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: e2e
+      - name: Start WireMock (Qiita + Zenn)
+        run: |
+          docker rm -f qiita-api zenn-api 2>/dev/null || true
+          docker run -d --rm --name qiita-api -p 3000:8080 wiremock/wiremock:3.10.0
+          docker run -d --rm --name zenn-api -p 3001:8080 wiremock/wiremock:3.10.0
       - name: Run api
         env:
           QIITA_URL: 'http://localhost:3000'
           ZENN_URL: 'http://localhost:3001'
         run: pnpm tsx src/main/index.ts &
         working-directory: app
-      - name: Install E2E dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: e2e
       - name: Run e2e tests
         env:
+          TARGET_URL: 'http://localhost:13000'
           QIITA_URL: 'http://localhost:3000'
           ZENN_URL: 'http://localhost:3001'
         run: pnpm vitest run
         working-directory: e2e
-      - name: Down api
-        run: fuser -k -9 13000/tcp
+      - name: Stop WireMock and API
+        run: |
+          docker rm -f qiita-api zenn-api 2>/dev/null || true
+          fuser -k -9 13000/tcp 2>/dev/null || true
   build-image:
     needs: [run-e2e-tests]
     timeout-minutes: 60
