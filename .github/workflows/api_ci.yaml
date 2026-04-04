@@ -16,6 +16,9 @@ jobs:
   run-unit-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      QIITA_URL: 'http://localhost:3000'
+      ZENN_URL: 'http://localhost:3001'
     defaults:
       run:
         working-directory: app
