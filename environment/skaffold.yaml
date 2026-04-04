@@ -31,3 +31,40 @@ profiles:
       - op: replace
         path: /deploy/helm/releases/0/setValues/replicas
         value: 2
+  - name: with-mock
+    activation:
+      - command: dev
+    patches:
+      - op: add
+        path: /build/artifacts/-
+        value:
+          image: wiremock-server
+          docker:
+            dockerfile: ./wiremock/docker/Dockerfile
+            context: ./wiremock/docker
+      - op: add
+        path: /deploy/helm/releases/-
+        value:
+          name: qiita-api
+          chartPath: ./wiremock/helm
+          setValues:
+            name: qiita-api
+            port: 3000
+            image: wiremock-server
+      - op: add
+        path: /deploy/helm/releases/-
+        value:
+          name: zenn-api
+          chartPath: ./wiremock/helm
+          setValues:
+            name: zenn-api
+            port: 3001
+            image: wiremock-server
+  - name: remove-app
+    activation:
+      - command: dev
+    patches:
+      - op: remove
+        path: /build/artifacts/0
+      - op: remove
+        path: /deploy/helm/releases/0
