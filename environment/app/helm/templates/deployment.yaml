@@ -18,6 +18,11 @@ spec:
         - name: {{ .Values.name }}
           image: {{ .Values.image }}
           imagePullPolicy: IfNotPresent
+          env:
+            - name: QIITA_URL
+              value: {{ .Values.qiitaUrl }}
+            - name: ZENN_URL
+              value: {{ .Values.zennUrl }}
           ports:
             - containerPort: 13000
               name: http-port

@@ -23,6 +23,8 @@ deploy:
           name: hono-api
           replicas: 1
           image: hono-api
+          qiitaUrl: https://qiita.com
+          zennUrl: https://zenn.dev
 profiles:
   - name: prd
     patches:

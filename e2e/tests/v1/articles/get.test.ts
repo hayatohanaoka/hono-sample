@@ -1,6 +1,15 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeAll, afterAll } from "vitest";
+import { server } from "../../../fixtures/v1/articles/get/mockServer.js";
 
 describe('GET /v1/articles', () => {
+    beforeAll(() => {
+        server.listen()
+    })
+
+    afterAll(() => {
+        server.close()
+    })
+
     test('qiitaとZennから、最新の記事を取得して返す', async () => {
         const expected = JSON.stringify({
             "articles": [
