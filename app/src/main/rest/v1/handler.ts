@@ -1,6 +1,7 @@
 import { Hono } from "hono"
-import { getArticlesUseCase } from "../../dependencies.js"
+import { getArticlesUseCase, searchArticlesUseCase } from "../../dependencies.js"
 import type { Articles } from "../../domain/articles.js"
+import { QueryParams } from "../../domain/queries.js"
 
 type ArticlesResponse = {
     "articles": ArticleResponse[]
@@ -31,10 +32,11 @@ v1.get('/systems/ping', (c) => {
 })
 
 v1.get('/articles', async (c) => {
-    const articles = await getArticlesUseCase.execute()
-    return c.json(
-        toArticlesResponse(articles)
-    )
+    const q = c.req.query('q')
+    const articles = q
+        ? await searchArticlesUseCase.execute(new QueryParams(q))
+        : await getArticlesUseCase.execute()
+    return c.json(toArticlesResponse(articles))
 })
 
 export default v1

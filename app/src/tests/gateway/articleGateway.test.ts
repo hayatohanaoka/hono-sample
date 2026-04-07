@@ -3,6 +3,7 @@ import { mock } from "vitest-mock-extended"
 import { Article, Articles } from "../../main/domain/articles.js"
 import type { IDriver } from "../../main/driver/driver.js"
 import { ArticlesGateway } from "../../main/gateway/articlesGateway.js"
+import { QueryParams } from "../../main/domain/queries.js"
 
 describe("ArticlesGateway", () => {
     afterEach(() => {
@@ -35,6 +36,39 @@ describe("ArticlesGateway", () => {
             const actual = await articlesGateway.get()
 
             expect(actual).toEqual(expected)
+
+            expect(toArticlesSpy).toHaveBeenCalledWith(mockQiitaResponse, mockZennResponse)
+            expect(toArticlesSpy).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe("search", () => {
+        test("searchQueryを受け取って、qiitaとZennから記事を取得し、Articlesに変換して返す", async () => {
+            const expected = new Articles([
+                new Article("AI Agentについて、全てをお話します", new URL("https://qiita.com/dummy/items/1")),
+                new Article("AI Agentのセットアップ方法", new URL("https://zenn.dev/dummy_pub/articles/dummy-article-slug")),
+            ])
+
+            const mockQiitaDriver = mock<IDriver>()
+            const mockQiitaResponse = mock<any>()
+            mockQiitaDriver.searchArticles.mockResolvedValue(mockQiitaResponse)
+
+            const mockZennDriver = mock<IDriver>()
+            const mockZennResponse = mock<any>()
+            mockZennDriver.searchArticles.mockResolvedValue(mockZennResponse)
+
+            const articlesGateway = new ArticlesGateway(mockQiitaDriver, mockZennDriver)
+
+            const toArticlesSpy = vi
+                .spyOn(ArticlesGateway, "toArticlesFromResponse")
+                .mockResolvedValue(expected)
+
+            const queryParams = new QueryParams("AI Agent")
+            const actual = await articlesGateway.search(queryParams)
+
+            expect(actual).toEqual(expected)
+            expect(mockQiitaDriver.searchArticles).toHaveBeenCalledWith("AI Agent")
+            expect(mockZennDriver.searchArticles).toHaveBeenCalledWith("AI Agent")
 
             expect(toArticlesSpy).toHaveBeenCalledWith(mockQiitaResponse, mockZennResponse)
             expect(toArticlesSpy).toHaveBeenCalledTimes(1)

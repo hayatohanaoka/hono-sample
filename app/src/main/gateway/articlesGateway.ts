@@ -1,5 +1,6 @@
 import { ZENN_HOST } from "../articleSourceUrls.js";
 import { Article, Articles } from "../domain/articles.js";
+import type { QueryParams } from "../domain/queries.js";
 import type { IDriver } from "../driver/driver.js";
 import type { ArticlesPort } from "../port/articlesPort.js";
 
@@ -19,6 +20,13 @@ export class ArticlesGateway implements ArticlesPort {
         ]).then(([qiitaResponse, zennResponse]) =>
             ArticlesGateway.toArticlesFromResponse(qiitaResponse, zennResponse),
         );
+
+    search = (queryParams: QueryParams): Promise<Articles> => Promise.all([
+        this.qiitaDriver.searchArticles(queryParams.searchQuery),
+        this.zennDriver.searchArticles(queryParams.searchQuery),
+    ]).then(([qiitaResponse, zennResponse]) =>
+        ArticlesGateway.toArticlesFromResponse(qiitaResponse, zennResponse),
+    );  
 
     static toArticlesFromResponse = (
         qiitaResponse: any,
