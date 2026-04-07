@@ -2,6 +2,8 @@ import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { postStub, resetStubs } from "../../../src/setup-wiremock.js";
 import qiitaMapping from "../../../fixtures/v1/articles/get/mappings/qiita.json" with { type: "json" };
 import zennMapping from "../../../fixtures/v1/articles/get/mappings/zenn.json" with { type: "json" };
+import qiitaTypescriptMapping from "../../../fixtures/v1/articles/get/mappings/qiita-typescript.json" with { type: "json" };
+import zennTypescriptMapping from "../../../fixtures/v1/articles/get/mappings/zenn-typescript.json" with { type: "json" };
 
 describe('GET /v1/articles', () => {
 
@@ -38,6 +40,33 @@ describe('GET /v1/articles', () => {
         console.log(`${process.env.BASE_URL!!}/api/v1/articles`);
 
         const response = await fetch(`${process.env.TARGET_URL!!}/api/v1/articles`);
+
+        const actual = await response.json();
+
+        expect(response.status).toBe(200);
+        expect(actual).toEqual(expected);
+    });
+
+    test('qiitaとZennから、typescriptに関する記事を取得して返す', async () => {
+        await postStub(process.env.QIITA_URL!!, JSON.stringify(qiitaTypescriptMapping));
+        await postStub(process.env.ZENN_URL!!, JSON.stringify(zennTypescriptMapping));
+
+        const expected = {
+            "articles": [
+                {
+                    title: "TypeScriptについて、全てをお話します",
+                    url: "https://qiita.com/dummy/items/1"
+                },
+                {
+                    title: "TypeScriptについての資料です",
+                    url: `${process.env.ZENN_URL!!}/dummy_pub/articles/dummy-article-slug`
+                }
+            ]
+        }
+
+        console.log(`${process.env.BASE_URL!!}/api/v1/articles?q=typescript`);
+
+        const response = await fetch(`${process.env.TARGET_URL!!}/api/v1/articles?q=typescript`);
 
         const actual = await response.json();
 
