@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "url": "/api/articles?article_type=tech&topic_name=typescript"
+    "url": "/api/articles?article_type=tech&topicname=typescript"
   },
   "response": {
     "status": 200,

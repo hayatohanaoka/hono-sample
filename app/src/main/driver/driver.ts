@@ -40,7 +40,7 @@ export class ZennDriver implements IDriver {
     }
 
     async searchArticles(query: string): Promise<any> {
-        const response = await fetch(`${ZENN_HOST}${this.ENDPOINT}&query=${query}`)
+        const response = await fetch(`${ZENN_HOST}${this.ENDPOINT}&topicname=${query}`)
         
         if (!response.ok) throw new Error(`Failed to search Zenn articles: ${response.statusText}`)
         
