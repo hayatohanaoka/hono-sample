@@ -40,8 +40,7 @@ profiles:
         value:
           image: wiremock-server
           docker:
-            dockerfile: ./wiremock/docker/Dockerfile
-            context: ./wiremock/docker
+            dockerfile: ./wiremock/Dockerfile
       - op: add
         path: /deploy/helm/releases/-
         value:
