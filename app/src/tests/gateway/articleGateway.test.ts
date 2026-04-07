@@ -122,7 +122,7 @@ describe("ArticlesGateway", () => {
                 const mockQiitaResponse = [mockQiitaArticle1, mockQiitaArticle2]
     
                 const toArticleFromQiitaResponseSpy = vi
-                    . spyOn(ArticlesGateway, "toArticleFromQiitaResponse")
+                    .spyOn(ArticlesGateway, "toArticleFromQiitaResponse")
                     .mockReturnValue(mockArticle)
     
                 const actual = ArticlesGateway.toArticlesFromQiitaResponse(mockQiitaResponse)

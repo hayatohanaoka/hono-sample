@@ -8,7 +8,6 @@ export class GetArticlesUseCase {
         this.port = port;
     }
 
-    async execute(): Promise<Articles> {
-        return await this.port.get()
-    }
+    execute = async (): Promise<Articles> =>
+        await this.port.get()
 }

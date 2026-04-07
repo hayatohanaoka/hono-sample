@@ -21,12 +21,13 @@ export class ArticlesGateway implements ArticlesPort {
             ArticlesGateway.toArticlesFromResponse(qiitaResponse, zennResponse),
         );
 
-    search = (queryParams: QueryParams): Promise<Articles> => Promise.all([
-        this.qiitaDriver.searchArticles(queryParams.searchQuery),
-        this.zennDriver.searchArticles(queryParams.searchQuery),
-    ]).then(([qiitaResponse, zennResponse]) =>
-        ArticlesGateway.toArticlesFromResponse(qiitaResponse, zennResponse),
-    );  
+    search = async (queryParams: QueryParams): Promise<Articles> =>
+        await Promise.all([
+            this.qiitaDriver.searchArticles(queryParams.searchQuery),
+            this.zennDriver.searchArticles(queryParams.searchQuery),
+        ]).then(([qiitaResponse, zennResponse]) =>
+            ArticlesGateway.toArticlesFromResponse(qiitaResponse, zennResponse),
+        );
 
     static toArticlesFromResponse = (
         qiitaResponse: any,
@@ -38,25 +39,24 @@ export class ArticlesGateway implements ArticlesPort {
         );
 
     // for qiita
-    static toArticlesFromQiitaResponse = (qiitaResponse: any): Articles =>
+    static toArticlesFromQiitaResponse = (articlesResponse: any): Articles =>
         new Articles(
-            qiitaResponse.map((articleResponse: any) =>
+            articlesResponse.map((articleResponse: any) =>
                 ArticlesGateway.toArticleFromQiitaResponse(articleResponse),
             ),
         );
 
-    static toArticleFromQiitaResponse = (qiitaResponse: any): Article =>
-        new Article(qiitaResponse.title, new URL(qiitaResponse.url));
-
+    static toArticleFromQiitaResponse = (articleResponse: any): Article =>
+        new Article(articleResponse.title, new URL(articleResponse.url));
 
     // for zenn
-    static toArticlesFromZennResponse = (zennResponse: any): Articles =>
+    static toArticlesFromZennResponse = (articlesResponse: any): Articles =>
         new Articles(
-            zennResponse.map((articleResponse: any) =>
+            articlesResponse.map((articleResponse: any) =>
                 ArticlesGateway.toArticleFromZennResponse(articleResponse),
             ),
         );
 
-    static toArticleFromZennResponse = (zennResponse: any): Article =>
-        new Article(zennResponse.title, new URL(`${ZENN_HOST}${zennResponse.path}`));
+    static toArticleFromZennResponse = (articleResponse: any): Article =>
+        new Article(articleResponse.title, new URL(`${ZENN_HOST}${articleResponse.path}`));
 }

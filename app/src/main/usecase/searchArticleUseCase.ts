@@ -9,7 +9,6 @@ export class SearchArticleUseCase {
         this.port = port;
     }
 
-    execute(queryParams: QueryParams): Promise<Articles> {
-        return this.port.search(queryParams)
-    }
+    execute = async (queryParams: QueryParams): Promise<Articles> =>
+        await this.port.search(queryParams)
 }
