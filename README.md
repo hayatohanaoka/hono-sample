@@ -14,8 +14,8 @@ Hono と TypeScript による API です。
   `main` 向けの push / PR で、単体 → E2E（WireMock コンテナ + API 起動）→ コンテナイメージビルド（Skaffold）までを GitHub Actions で実行します。
 - **E2E フィクスチャの分離**
   - 外部 API の応答は **テストコードに直書きせず**、WireMock 用のマッピング JSON を `e2e/fixtures/` に置く。
-  - **API のバージョン・パスに沿った配置**（例）: `e2e/fixtures/v1/articles/get/mappings/*.json`
-  - テスト側は `postStub()`（`e2e/src/setup-wiremock.ts`）で Admin API にマッピングを流し込み、**シナリオごとにファイルを差し替え**やすくする。
+  - テストファイルのパスから fixture ディレクトリを**自動解決**する規約を採用。`e2e/tests/` 配下のパスを `e2e/fixtures/` へ読み替え、サービスごとのサブディレクトリ（`qiita/`・`zenn/`）を走査する（例: `e2e/tests/v1/articles/get.test.ts` → `e2e/fixtures/v1/articles/get/{qiita,zenn}/*.json`）。
+  - テスト側は `beforeEach` で `resetAllStubs()` → `setUpStubs(import.meta.filename)`（`e2e/src/setup-wiremock.ts`）を呼ぶだけで、対応する fixture が WireMock Admin API に流し込まれる。
   - 期待するレスポンスの大きな JSON をテスト本体から切り離し、**ケース追加・差分レビュー**をしやすくする。
 
 ### 設計
