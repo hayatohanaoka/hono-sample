@@ -1,20 +1,14 @@
-import { describe, test, expect, beforeAll, afterAll } from "vitest";
-import { postStub, resetStubs } from "../../../src/setup-wiremock.js";
-import qiitaMapping from "../../../fixtures/v1/articles/get/mappings/qiita.json" with { type: "json" };
-import zennMapping from "../../../fixtures/v1/articles/get/mappings/zenn.json" with { type: "json" };
-import qiitaTypescriptMapping from "../../../fixtures/v1/articles/get/mappings/qiita-typescript.json" with { type: "json" };
-import zennTypescriptMapping from "../../../fixtures/v1/articles/get/mappings/zenn-typescript.json" with { type: "json" };
+import { describe, test, expect, beforeEach } from "vitest";
+import { resetAllStubs, setUpStubs } from "../../../src/setup-wiremock.js";
 
 describe('GET /v1/articles', () => {
 
-    afterAll(async () => {
-        await resetStubs(process.env.QIITA_URL!!);
-        await resetStubs(process.env.ZENN_URL!!);
+    beforeEach(async () => {
+        await resetAllStubs();
+        await setUpStubs(import.meta.filename);
     });
 
     test('qiitaとZennから、最新の記事を取得して返す', async () => {
-        await postStub(process.env.QIITA_URL!!, JSON.stringify(qiitaMapping));
-        await postStub(process.env.ZENN_URL!!, JSON.stringify(zennMapping));
 
         const expected = {
             "articles": [
@@ -48,9 +42,6 @@ describe('GET /v1/articles', () => {
     });
 
     test('qiitaとZennから、typescriptに関する記事を取得して返す', async () => {
-        await postStub(process.env.QIITA_URL!!, JSON.stringify(qiitaTypescriptMapping));
-        await postStub(process.env.ZENN_URL!!, JSON.stringify(zennTypescriptMapping));
-
         const expected = {
             "articles": [
                 {
