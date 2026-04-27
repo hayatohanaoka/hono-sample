@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach } from "vitest";
-import { resetAllStubs, setUpStubs } from "../../../src/setup-wiremock.js";
+import { resetAllStubs, setUpStubs } from "../../../../src/setup-wiremock.js";
 
 describe('GET /v1/articles', () => {
 
