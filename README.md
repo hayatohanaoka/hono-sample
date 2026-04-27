@@ -2,7 +2,7 @@
 
 Hono と TypeScript による API です。
 
-**安全な開発 と 設計のアウトプット を目的に作成** したため、ローカルで完結する実行・検証を前提に、単体テストと E2E、外部 API のモック（WireMock）、Docker / Kubernetes（Helm / Skaffold）、GitHub Actions による CI を揃えています。
+\**安全な開発 と 設計のアウトプット を目的に作成** したため、ローカルで完結する実行・検証を前提に、単体テストと E2E、外部 API のモック（WireMock）、Docker / Kubernetes（Helm / Skaffold）、GitHub Actions による CI を揃えています。
 
 ## このリポジトリで意識していること
 
@@ -14,7 +14,7 @@ Hono と TypeScript による API です。
   `main` 向けの push / PR で、単体 → E2E（WireMock コンテナ + API 起動）→ コンテナイメージビルド（Skaffold）までを GitHub Actions で実行します。
 - **E2E フィクスチャの分離**
   - 外部 API の応答は **テストコードに直書きせず**、WireMock 用のマッピング JSON を `e2e/fixtures/` に置く。
-  - テストファイルのパスから fixture ディレクトリを**自動解決**する規約を採用。`e2e/tests/` 配下のパスを `e2e/fixtures/` へ読み替え、サービスごとのサブディレクトリ（`qiita/`・`zenn/`）を走査する（例: `e2e/tests/v1/articles/get.test.ts` → `e2e/fixtures/v1/articles/get/{qiita,zenn}/*.json`）。
+  - テストファイルのパスから fixture ディレクトリを**自動解決**する規約を採用。`e2e/tests/` 配下のパスを `e2e/fixtures/` へ読み替え、サービスごとのサブディレクトリ（`qiita/`・`zenn/`）を走査する（例: `e2e/tests/api/v1/articles/get.test.ts` → `e2e/fixtures/api/v1/articles/get/{qiita,zenn}/*.json`）。
   - テスト側は `beforeEach` で `resetAllStubs()` → `setUpStubs(import.meta.filename)`（`e2e/src/setup-wiremock.ts`）を呼ぶだけで、対応する fixture が WireMock Admin API に流し込まれる。
   - 期待するレスポンスの大きな JSON をテスト本体から切り離し、**ケース追加・差分レビュー**をしやすくする。
 
@@ -63,18 +63,18 @@ Hono と TypeScript による API です。
 
 ## API エンドポイント
 
-ベースパスは **`/api/v1`** です。ローカルで `pnpm dev` した場合の例では **`http://localhost:13000`** がオリジンになります（`app/src/main/index.ts` の `serve` 設定）。
+記事関連のエンドポイントは **`/api/v1`**、システム系は **`/v1`** をベースパスとしています。ローカルで `pnpm dev` した場合の例では **`http://localhost:13000`** がオリジンになります（`app/src/main/index.ts` の `serve` 設定）。
 
 | メソッド | パス | 説明 |
 |----------|------|------|
-| `GET` | `/api/v1/systems/ping` | 疎通確認。レスポンスボディは `pong`（テキスト） |
+| `GET` | `/v1/systems/ping` | 疎通確認。レスポンスボディは `pong`（テキスト） |
 | `GET` | `/api/v1/articles` | 記事一覧（Qiita / Zenn 相当 API を集約した結果を JSON で返す） |
 | `GET` | `/api/v1/articles?q=…` | クエリ `q` ありのときは検索用ユースケースへ |
 
 例:
 
 ```bash
-curl -sS http://localhost:13000/api/v1/systems/ping
+curl -sS http://localhost:13000/v1/systems/ping
 curl -sS http://localhost:13000/api/v1/articles
 curl -sS 'http://localhost:13000/api/v1/articles?q=typescript'
 ```
