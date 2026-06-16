@@ -1,4 +1,4 @@
-FROM node:26-alpine AS base
+FROM node:26.3.0-alpine3.22 AS base
 RUN npm install -g pnpm
 COPY . /app
 
