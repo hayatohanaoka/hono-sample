@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const qiitaMockUrl = process.env.QIITA_URL!;
-const zennMockUrl = process.env.ZENN_URL!;
+export const qiitaMockUrl = process.env.QIITA_URL!;
+export const zennMockUrl = process.env.ZENN_URL!;
 
 export async function setUpStubs(callerFilePath: string) {
   const qiitaFixtureDir = createFixtureDirPath(callerFilePath, 'qiita');
@@ -47,13 +47,5 @@ function createFixtureDirPath(callerFilePath: string, serviceName: string) {
     serviceName,
   );
 
-
-  console.log('fixtureDir', fixtureDir);
   return fixtureDir;
-}
-
-
-export async function resetAllStubs(): Promise<void> {
-  await fetch(`${qiitaMockUrl}/__admin/reset`, {method: "POST"});
-  await fetch(`${zennMockUrl}/__admin/reset`, {method: "POST"});
 }
