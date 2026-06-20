@@ -12,6 +12,16 @@ type ArticleResponse = {
     url: string
 }
 
+const v1Handler = new Hono()
+
+v1Handler.get('/articles', async (c) => {
+    const q = c.req.query('q')
+    const articles = q
+        ? await searchArticlesUseCase.execute(new QueryParams(q))
+        : await getArticlesUseCase.execute()
+    return c.json(toArticlesResponse(articles))
+})
+
 function toArticlesResponse(articles: Articles): ArticlesResponse {
     return {
         "articles": articles.items.map(item =>
@@ -23,16 +33,5 @@ function toArticlesResponse(articles: Articles): ArticlesResponse {
 function toArticleResponse(title: string, url: URL): ArticleResponse {
     return { title, url: url.toString() }
 }
-
-
-const v1Handler = new Hono()
-
-v1Handler.get('/articles', async (c) => {
-    const q = c.req.query('q')
-    const articles = q
-        ? await searchArticlesUseCase.execute(new QueryParams(q))
-        : await getArticlesUseCase.execute()
-    return c.json(toArticlesResponse(articles))
-})
 
 export default v1Handler
